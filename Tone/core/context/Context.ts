@@ -9,6 +9,7 @@ import { AnyAudioContext, createAudioContext, createAudioWorkletNode } from "./A
 import { closeContext, initializeContext } from "./ContextInitialization";
 import { BaseContext, ContextLatencyHint } from "./BaseContext";
 import { assert } from "../util/Debug";
+import { PolyfillConstantSourceNode } from './polyfill/constantSourceNode';
 
 type Transport = import("../clock/Transport").Transport;
 type Destination = import("./Destination").Destination;
@@ -117,7 +118,6 @@ export class Context extends BaseContext {
 	constructor() {
 		super();
 		const options = optionsFromArguments(Context.getDefaults(), arguments, ["context"]);
-
 		if (options.context) {
 			this._context = options.context;
 		} else {
@@ -185,6 +185,9 @@ export class Context extends BaseContext {
 		return this._context.createChannelSplitter(numberOfOutputs);
 	}
 	createConstantSource(): ConstantSourceNode {
+		if (typeof this._context.createConstantSource === 'undefined') {
+			return (new PolyfillConstantSourceNode(this._context) as any as ConstantSourceNode);
+		} 
 		return this._context.createConstantSource();
 	}
 	createConvolver(): ConvolverNode {
@@ -200,6 +203,9 @@ export class Context extends BaseContext {
 		return this._context.createGain();
 	}
 	createIIRFilter(feedForward: number[] | Float32Array, feedback: number[] | Float32Array): IIRFilterNode {
+		if (typeof this._context.createIIRFilter === 'undefined') {
+			throw Error('createIIRFilter dose not support in your browser');
+		}
 		// @ts-ignore
 		return this._context.createIIRFilter(feedForward, feedback);
 	}

@@ -1,6 +1,8 @@
 import { ToneAudioNode, ToneAudioNodeOptions } from "./ToneAudioNode";
 import { Param } from "./Param";
 import { onContextClose, onContextInit } from "./ContextInitialization";
+import { AnyAudioContext } from './AudioContext';
+import { Context } from './Context';
 
 export interface ListenerOptions extends ToneAudioNodeOptions{
 	positionX: number;
@@ -104,12 +106,143 @@ export class Listener extends ToneAudioNode<ListenerOptions> {
 	}
 }
 
+class PolyfillListener extends ToneAudioNode<ListenerOptions> {
+
+	readonly name: string = "PolyfillListener";
+
+	/**
+	 * The listener has no inputs or outputs. 
+	 */
+	output: undefined; 
+	input: undefined; 
+
+	/**
+	*  Holds the current forward orientation
+	*  @type  {Array}
+	*  @private
+	*/
+	private _orientation = [0, 0, 0, 0, 0, 0];
+	
+	/**
+	 *  Holds the current position
+	 *  @type  {Array}
+	 *  @private
+	 */
+	private _position = [0, 0, 0];
+
+	constructor(public context:Context) {
+		super();
+	}
+	
+	get positionX() {
+		return this._position[0];
+	}
+	set positionX(posX) {
+		this.setPosition(posX, this._position[1], this._position[2]);
+	}
+	get positionY() {
+		return this._position[1];
+	}
+	set positionY(posY) {
+		this.setPosition(this._position[0], posY, this._position[2]);
+	}
+	get positionZ() {
+		return this._position[2];
+	}
+	set positionZ(posZ) {
+		this.setPosition(this._position[0], this._position[1],posZ);
+	}
+
+	public setPosition = (x, y, z) => {
+		this.context.rawContext.listener.setPosition(x, y, z);
+		this._position = [x, y, z];
+	}
+
+	get forwardX() {
+		return this._orientation[0]; 
+	}
+	set forwardX(pos) {
+		this._orientation[0] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	get forwardY() {
+		return this._orientation[1]; 
+	}
+	set forwardY(pos) {
+		this._orientation[1] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	get forwardZ() {
+		return this._orientation[2]; 
+	}
+	set forwardZ(pos) {
+		this._orientation[2] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	get upX() {
+		return this._orientation[3];
+	}
+	set upX(pos) {
+		this._orientation[3] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	get upY() {
+		return this._orientation[4]; 
+	}
+	set upY(pos) {
+		this._orientation[4] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	get upZ() {
+		return this._orientation[5]; 
+	}
+	set upZ(pos) {
+		this._orientation[5] = pos;
+		this.setOrientation.apply(this, this._orientation);
+	}
+
+	public setOrientation(x, y, z, upX, upY, upZ) {
+		this.context.rawContext.listener.setOrientation(x, y, z, upX, upY, upZ);
+		this._orientation = [x, y, z, upX, upY, upZ];
+	}
+
+	static getDefaults(): ListenerOptions {
+		return Object.assign(ToneAudioNode.getDefaults(), {
+			positionX: 0,
+			positionY: 0,
+			positionZ: 0,
+			forwardX: 0,
+			forwardY: 0,
+			forwardZ: -1,
+			upX: 0,
+			upY: 1,
+			upZ: 0,
+		});
+	}
+
+	dispose(): this {
+		super.dispose();
+		delete this._orientation;
+		delete this._position;
+		return this;
+	}
+}
+
 //-------------------------------------
 // 	INITIALIZATION
 //-------------------------------------
 
-onContextInit(context => {
-	context.listener = new Listener({ context });
+onContextInit((context) => {
+	if (context.rawContext.listener.forwardX) {
+		context.listener = new Listener({ context });
+	} else {
+		context.listener = (new PolyfillListener(context) as any as Listener);
+	}
 });
 
 onContextClose(context => {

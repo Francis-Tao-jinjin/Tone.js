@@ -24,12 +24,12 @@ export class ToneConstantSource<TypeName extends UnitName = "number"> extends On
 	/**
 	 * The signal generator
 	 */
-	private _source = this.context.createConstantSource();
+	private _source!:ConstantSourceNode;
 
 	/**
 	 * The offset of the signal generator
 	 */
-	readonly offset: Param<TypeName>;
+	readonly offset!: Param<TypeName>;
 
 	/**
 	 * @param  offset   The offset value
@@ -37,21 +37,27 @@ export class ToneConstantSource<TypeName extends UnitName = "number"> extends On
 	constructor(offset: UnitMap[TypeName]);
 	constructor(options?: Partial<ToneConstantSourceOptions<TypeName>>);
 	constructor() {
-
 		super(optionsFromArguments(ToneConstantSource.getDefaults(), arguments, ["offset"]));
+
 		const options = optionsFromArguments(ToneConstantSource.getDefaults(), arguments, ["offset"]);
 
-		connect(this._source, this._gainNode);
+		try {
+			this._source = this.context.createConstantSource();
+			connect(this._source, this._gainNode);
 
-		this.offset = new Param({
-			context: this.context,
-			convert: options.convert,
-			param: this._source.offset,
-			units: options.units,
-			value: options.offset,
-			minValue: options.minValue,
-			maxValue: options.maxValue,
-		});
+			this.offset = new Param({
+				context: this.context,
+				convert: options.convert,
+				param: this._source.offset,
+				units: options.units,
+				value: options.offset,
+				minValue: options.minValue,
+				maxValue: options.maxValue,
+			});
+		} catch (e) {
+			console.error('ToneConstantSource constructor:' ,e);
+			return;
+		}
 	}
 
 	static getDefaults(): ToneConstantSourceOptions<any> {

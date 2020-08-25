@@ -166,7 +166,6 @@ export class Transport extends ToneWithContext<TransportOptions> implements Emit
 
 		super(optionsFromArguments(Transport.getDefaults(), arguments));
 		const options = optionsFromArguments(Transport.getDefaults(), arguments);
-
 		// CLOCK/TEMPO
 		this._ppq = options.ppq;
 		this._clock = new Clock({
@@ -178,10 +177,10 @@ export class Transport extends ToneWithContext<TransportOptions> implements Emit
 		this._bindClockEvents();
 		this.bpm = this._clock.frequency as unknown as TickParam<"bpm">;
 		this._clock.frequency.multiplier = options.ppq;
+
 		this.bpm.setValueAtTime(options.bpm, 0);
 		readOnly(this, "bpm");
 		this._timeSignature = options.timeSignature;
-
 		// SWING
 		this._swingTicks = options.ppq / 2; // 8n
 	}

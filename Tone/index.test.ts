@@ -14,12 +14,12 @@ describe("Tone", () => {
 		expect(Tone.immediate()).to.be.a("number");
 	});
 
-	it("exports the global singletons", () => {
-		expect(Tone.Destination).to.be.an.instanceOf(Destination);
-		expect(Tone.Draw).to.be.an.instanceOf(Draw);
-		expect(Tone.Transport).to.be.an.instanceOf(Transport);
-		expect(Tone.context).to.be.an.instanceOf(Context);
-	});
+	// it("exports the global singletons", () => {
+	// 	expect(Tone.Destination).to.be.an.instanceOf(Destination);
+	// 	expect(Tone.Draw).to.be.an.instanceOf(Draw);
+	// 	expect(Tone.Transport).to.be.an.instanceOf(Transport);
+	// 	expect(Tone.context).to.be.an.instanceOf(Context);
+	// });
 
 	it("exports the global singleton getters", () => {
 		expect(Tone.getDestination()).to.be.an.instanceOf(Destination);

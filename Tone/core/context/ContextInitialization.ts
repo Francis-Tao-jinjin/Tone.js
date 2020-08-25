@@ -21,7 +21,9 @@ export function onContextInit(cb: (ctx: Context) => void): void {
  */
 export function initializeContext(ctx: Context): void {
 	// add any additional modules
-	notifyNewContext.forEach(cb => cb(ctx));
+	notifyNewContext.forEach(cb => {
+		cb(ctx);
+	});
 }
 
 /**

@@ -43,7 +43,6 @@ export class Destination extends ToneAudioNode<DestinationOptions> {
 
 		super(optionsFromArguments(Destination.getDefaults(), arguments));
 		const options = optionsFromArguments(Destination.getDefaults(), arguments);
-
 		connectSeries(this.input, this.output, this.context.rawContext.destination);
 
 		this.mute = options.mute;

@@ -30,7 +30,7 @@ export function immediate(): Seconds {
  * See [[Transport]]
  * @category Core
  */
-export const Transport = getContext().transport;
+// export const Transport = getContext().transport;
 
 /**
  * The Transport object belonging to the global Tone.js Context.
@@ -46,12 +46,12 @@ export function getTransport(): import("./core/clock/Transport").Transport {
  * See [[Destination]]
  * @category Core
  */
-export const Destination = getContext().destination;
+// export const Destination = getContext().destination;
 
 /**
  * @deprecated Use [[Destination]]
  */
-export const Master = getContext().destination;
+// export const Master = getContext().destination;
 
 /**
  * The Destination (output) belonging to the global Tone.js Context.
@@ -66,7 +66,7 @@ export function getDestination(): import("./core/context/Destination").Destinati
  * The [[Listener]] belonging to the global Tone.js Context.
  * @category Core
  */
-export const Listener = getContext().listener;
+// export const Listener = L().listener;
 
 /**
  * The [[Listener]] belonging to the global Tone.js Context.
@@ -81,7 +81,7 @@ export function getListener(): import("./core/context/Listener").Listener {
  * See [[Draw]]
  * @category Core
  */
-export const Draw = getContext().draw;
+// export const Draw = getContext().draw;
 
 /**
  * Get the singleton attached to the global context. 
@@ -97,7 +97,7 @@ export function getDraw(): import("./core/util/Draw").Draw {
  * A reference to the global context
  * See [[Context]]
  */
-export const context = getContext();
+// export const context = getContext();
 
 /**
  * Promise which resolves when all of the loading promises are resolved. 

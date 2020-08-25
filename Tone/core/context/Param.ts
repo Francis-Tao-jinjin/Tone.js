@@ -188,6 +188,9 @@ export class Param<TypeName extends UnitName = "number">
 	 * Make sure the value is always in the defined range
 	 */
 	private _assertRange(value: number): number {
+		if (typeof window !== 'undefined' && typeof (window as any).webkitAudioContext !== 'undefined' && (this._param as any).name === 'gain') {
+			return value;
+		}
 		if (isDefined(this.maxValue) && isDefined(this.minValue)) {
 			assertRange(value, this._fromType(this.minValue), this._fromType(this.maxValue));
 		}
