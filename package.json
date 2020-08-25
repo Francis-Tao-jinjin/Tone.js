@@ -33,6 +33,7 @@
 		"test:travis": "npm run build && npm run lint && npm run test",
 		"test:watch": "npm run collect:tests && npm run karma:watch",
 		"ts:build": "tsc --project ./scripts/tsconfig.build.json",
+		"type:build": "tsc --project ./scripts/tsconfig.buildType.json",
 		"watch": "tsc --watch",
 		"webpack:watch": "webpack -w --env.production --mode=development",
 		"webpack:build": "webpack -p --env.production"
