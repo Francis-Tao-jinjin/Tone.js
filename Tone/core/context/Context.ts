@@ -9,7 +9,6 @@ import { AnyAudioContext, createAudioContext, createAudioWorkletNode } from "./A
 import { closeContext, initializeContext } from "./ContextInitialization";
 import { BaseContext, ContextLatencyHint } from "./BaseContext";
 import { assert } from "../util/Debug";
-import { PolyfillConstantSourceNode } from './polyfill/constantSourceNode';
 
 type Transport = import("../clock/Transport").Transport;
 type Destination = import("./Destination").Destination;
@@ -56,13 +55,11 @@ export class Context extends BaseContext {
 	/**
 	 * private reference to the BaseAudioContext
 	 */
-	protected readonly _context: AnyAudioContext;
-
+	protected _context: AnyAudioContext;
 	/**
 	 * A reliable callback method
 	 */
-	private readonly _ticker: Ticker;
-
+	private _ticker: Ticker;
 	/**
 	 * The default latency hint
 	 */
@@ -111,7 +108,11 @@ export class Context extends BaseContext {
 	/**
 	 * Indicates if the context is an OfflineAudioContext or an AudioContext
 	 */
-	readonly isOffline: boolean = false;
+	protected _isOffline: boolean = false;
+
+	get isOffline() {
+		return this._isOffline;
+	}
 
 	constructor(context?: AnyAudioContext);
 	constructor(options?: Partial<ContextOptions>);
@@ -125,7 +126,6 @@ export class Context extends BaseContext {
 				latencyHint: options.latencyHint,
 			});
 		}
-
 		this._ticker = new Ticker(this.emit.bind(this, "tick"), options.clockSource, options.updateInterval);
 		this.on("tick", this._timeoutLoop.bind(this));
 
@@ -185,9 +185,6 @@ export class Context extends BaseContext {
 		return this._context.createChannelSplitter(numberOfOutputs);
 	}
 	createConstantSource(): ConstantSourceNode {
-		if (typeof this._context.createConstantSource === 'undefined') {
-			return (new PolyfillConstantSourceNode(this._context) as any as ConstantSourceNode);
-		} 
 		return this._context.createConstantSource();
 	}
 	createConvolver(): ConvolverNode {

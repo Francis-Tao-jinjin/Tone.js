@@ -78,10 +78,10 @@ export class Ticker {
 	 * Create a timeout loop
 	 */
 	private _createTimeout(): void {
-		this._timeout = setTimeout(() => {
+		this._timeout = (setTimeout(() => {
 			this._createTimeout();
 			this._callback();
-		}, this._updateInterval * 1000);
+		}, this._updateInterval * 1000) as any);
 	}
 
 	/**

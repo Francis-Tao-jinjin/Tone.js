@@ -44,10 +44,8 @@ export async function Offline(
 ): Promise<ToneAudioBuffer> {
 	// set the OfflineAudioContext based on the current context
 	const originalContext = getContext();
-
 	const context = new OfflineContext(channels, duration, sampleRate);
 	setContext(context);
-
 	// invoke the callback/scheduling
 	await callback(context);
 

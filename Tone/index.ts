@@ -1,3 +1,6 @@
+require('./shim/offlineContext');
+require('./shim/audioParam');
+require("constant-source-node").polyfill();
 export { getContext, setContext } from "./core/Global";
 export * from "./classes";
 export * from "./version";

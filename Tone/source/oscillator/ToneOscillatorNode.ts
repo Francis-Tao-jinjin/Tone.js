@@ -93,7 +93,11 @@ export class ToneOscillatorNode extends OneShotSource<ToneOscillatorNodeOptions>
 	}
 
 	protected _stopSource(time?: Seconds): void {
-		this._oscillator.stop(time);
+		try {
+			this._oscillator.stop(time);
+		} catch (e) {
+			console.warn('ToneOscillatorNode: _oscillator already stopped');
+		}
 	}
 
 	/**

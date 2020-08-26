@@ -81,13 +81,21 @@ export class ToneConstantSource<TypeName extends UnitName = "number"> extends On
 	}
 
 	protected _stopSource(time?: Seconds): void {
-		this._source.stop(time);
+		try {
+			this._source.stop(time);
+		} catch (e) {
+			console.error('ToneConstantSource _stopSource error:', e);
+		}
 	}
 
 	dispose(): this {
 		super.dispose();
 		if (this.state === "started") {
-			this.stop();
+			try {
+				this.stop();
+			} catch (e) {
+				console.error('ToneConstantSource dispose stop error:', e);
+			}
 		}
 		this._source.disconnect();
 		this.offset.dispose();

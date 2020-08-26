@@ -106,5 +106,7 @@ export abstract class BaseContext extends Emitter<"statechange" | "tick"> implem
 
 	abstract immediate(): Seconds
 
-	readonly isOffline: boolean = false;
+	protected _isOffline: boolean = false;
+
+	abstract get isOffline(): boolean;
 }

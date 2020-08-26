@@ -191,7 +191,11 @@ export class ToneBufferSource extends OneShotSource<ToneBufferSourceOptions> {
 	protected _stopSource(time?: Seconds): void {
 		if (!this._sourceStopped && this._sourceStarted) {
 			this._sourceStopped = true;
-			this._source.stop(this.toSeconds(time));
+			try {
+				this._source.stop(this.toSeconds(time));
+			} catch (e) {
+				console.error('ToneBufferSource _stopSource error', e);
+			}
 			this._onended();
 		}
 	}

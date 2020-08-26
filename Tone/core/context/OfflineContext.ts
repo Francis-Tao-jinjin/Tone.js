@@ -18,11 +18,10 @@ import { ToneAudioBuffer } from "./ToneAudioBuffer";
 export class OfflineContext extends Context {
 
 	readonly name: string = "OfflineContext";
-
 	/**
 	 * A private reference to the duration
 	 */
-	private readonly _duration: Seconds;
+	private _duration: Seconds;
 
 	/**
 	 * An artificial clock source
@@ -34,8 +33,11 @@ export class OfflineContext extends Context {
 	 */
 	protected _context!: OfflineAudioContext;
 
-	readonly isOffline: boolean = true;
+	protected _isOffline: boolean = true;
 
+	get isOffline() {
+		return this._isOffline;
+	}
 	/**
 	 * @param  channels  The number of channels to render
 	 * @param  duration  The duration to render in seconds
@@ -48,7 +50,6 @@ export class OfflineContext extends Context {
 	);
 	constructor(context: OfflineAudioContext);
 	constructor() {
-
 		super({
 			clockSource: "offline",
 			context: isOfflineAudioContext(arguments[0]) ?
@@ -57,7 +58,7 @@ export class OfflineContext extends Context {
 			updateInterval: isOfflineAudioContext(arguments[0]) ?
 				128 / arguments[0].sampleRate : 128 / arguments[2],
 		});
-
+		this._isOffline = true;
 		this._duration = isOfflineAudioContext(arguments[0]) ?
 			arguments[0].length / arguments[0].sampleRate : arguments[1];
 	}
