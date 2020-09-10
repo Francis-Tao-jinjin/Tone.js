@@ -180,6 +180,7 @@ export class Filter extends ToneAudioNode<FilterOptions> {
 			response.forEach((val, i) => totalResponse[i] *= val);
 		});
 		filterClone.dispose();
+
 		return totalResponse;
 	}
 

@@ -1,7 +1,6 @@
 import { ToneAudioNode, ToneAudioNodeOptions } from "./ToneAudioNode";
 import { Param } from "./Param";
 import { onContextClose, onContextInit } from "./ContextInitialization";
-import { AnyAudioContext } from './AudioContext';
 import { Context } from './Context';
 
 export interface ListenerOptions extends ToneAudioNodeOptions{
