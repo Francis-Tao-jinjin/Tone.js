@@ -62,12 +62,12 @@ export function start(): Promise<void> {
 /**
  * Log Tone.js + version in the console.
  */
-if (theWindow && !theWindow.TONE_SILENCE_LOGGING) {
-	let prefix = "v";
-	if (version === "dev") {
-		prefix = "";
-	}
-	const printString = ` * Tone.js ${prefix} conservative ${version} * `;
-	// eslint-disable-next-line no-console
-	// console.log(`%c${printString}`, "background: #000; color: #fff");
-}
+// if (theWindow && !theWindow.TONE_SILENCE_LOGGING) {
+// 	let prefix = "v";
+// 	if (version === "dev") {
+// 		prefix = "";
+// 	}
+// 	const printString = ` * Tone.js ${prefix} conservative ${version} * `;
+// 	// eslint-disable-next-line no-console
+// 	console.log(`%c${printString}`, "background: #000; color: #fff");
+// }
