@@ -1,5 +1,7 @@
-import { version } from "../version";
-import { AnyAudioContext, hasAudioContext, theWindow } from "./context/AudioContext";
+// import { version } from "../version";
+import { AnyAudioContext, hasAudioContext,
+	// theWindow
+} from "./context/AudioContext";
 import { Context } from "./context/Context";
 import { DummyContext } from "./context/DummyContext";
 import { BaseContext } from "./context/BaseContext";
