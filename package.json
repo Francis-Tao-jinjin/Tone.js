@@ -1,6 +1,6 @@
 {
 	"name": "conservative-tonejs",
-	"version": "14.7.0",
+	"version": "14.7.1",
 	"description": "A conservative version of Yotam Mann's tonejs",
 	"main": "build/Tone.js",
 	"module": "build/esm/index.js",

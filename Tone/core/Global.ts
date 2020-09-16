@@ -69,5 +69,5 @@ if (theWindow && !theWindow.TONE_SILENCE_LOGGING) {
 	}
 	const printString = ` * Tone.js ${prefix} conservative ${version} * `;
 	// eslint-disable-next-line no-console
-	console.log(`%c${printString}`, "background: #000; color: #fff");
+	// console.log(`%c${printString}`, "background: #000; color: #fff");
 }

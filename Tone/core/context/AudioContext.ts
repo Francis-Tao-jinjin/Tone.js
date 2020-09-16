@@ -21,7 +21,7 @@ export function createOfflineAudioContext(channels: number, length: number, samp
 	if (stdOfflineCtxSupport) {
 		try {
 			offlineContext = new stdOfflineAudioContext(channels, length, sampleRate) as unknown as OfflineAudioContext;
-			console.log('create stdOfflineAudioContext');
+			// console.log('create stdOfflineAudioContext');
 		} catch(e) {
 			stdOfflineCtxSupport = false;
 			console.warn('create stdOfflineAudioContext failed', e);
@@ -29,7 +29,7 @@ export function createOfflineAudioContext(channels: number, length: number, samp
 			offlineContext = new OfflineAudioContext(channels, length, sampleRate);
 		}
 	} else {
-		console.log('create original OfflineAudioContext');
+		// console.log('create original OfflineAudioContext');
 		offlineContext = new OfflineAudioContext(channels, length, sampleRate);
 	}
 	return (offlineContext as OfflineAudioContext);
