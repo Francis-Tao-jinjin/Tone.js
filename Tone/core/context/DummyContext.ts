@@ -83,6 +83,10 @@ export class DummyContext extends BaseContext {
 		return {} as WaveShaperNode;
 	}
 
+	createScriptProcessor(): ScriptProcessorNode {
+		return {} as ScriptProcessorNode;
+	}
+
 	createMediaStreamSource(_stream: MediaStream): MediaStreamAudioSourceNode {
 		return {} as MediaStreamAudioSourceNode;
 	}

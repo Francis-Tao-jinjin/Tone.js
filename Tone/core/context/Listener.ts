@@ -226,8 +226,10 @@ class PolyfillListener extends ToneAudioNode<ListenerOptions> {
 
 	dispose(): this {
 		super.dispose();
-		delete this._orientation;
-		delete this._position;
+		(this._orientation as any) = null;
+		(this._position as any) = null;
+		// delete this._orientation;
+		// delete this._position;
 		return this;
 	}
 }

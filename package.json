@@ -97,16 +97,16 @@
 		"ts-loader": "^7.0.1",
 		"ts-node": "^8.4.1",
 		"typedoc": "^0.17.6",
-		"typescript": "^3.8.3",
+		"typescript": "^4.0.3",
 		"ua-parser-js": "^0.7.20",
-		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.11",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12",
 		"yargs": "^13.2.0"
 	},
 	"dependencies": {
 		"constant-source-node": "^1.1.1",
-		"standardized-audio-context": "^24.1.26",
-		"tslib": "^1.10.0"
+		"standardized-audio-context": "^25.0.4",
+		"tslib": "^2.0.1"
 	},
 	"prettier": {
 		"trailingComma": "es5",

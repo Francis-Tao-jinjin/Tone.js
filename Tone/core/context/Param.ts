@@ -46,6 +46,7 @@ export type AutomationEvent = NormalAutomationEvent | TargetAutomationEvent;
  * additional unit conversion functionality. It also
  * serves as a base-class for classes which have a single,
  * automatable parameter.
+ * @category Core
  */
 export class Param<TypeName extends UnitName = "number">
 	extends ToneWithContext<ParamOptions<TypeName>>
@@ -129,6 +130,10 @@ export class Param<TypeName extends UnitName = "number">
 		// if the value is defined, set it immediately
 		if (isDefined(options.value) && options.value !== this._toType(this._initialValue)) {
 			this.setValueAtTime(options.value, 0);
+		}
+
+		(this._param as any).getValueAtTime = (time:number) => {
+			return this.getValueAtTime(time);
 		}
 	}
 

@@ -16,7 +16,7 @@ type Listener = import("./Listener").Listener;
 type Draw = import("../util/Draw").Draw;
 
 // these are either not used in Tone.js or deprecated and not implemented.
-export type ExcludedFromBaseAudioContext = "onstatechange" | "addEventListener" | "removeEventListener" | "listener" | "dispatchEvent" | "audioWorklet" | "destination" | "createScriptProcessor";
+export type ExcludedFromBaseAudioContext = "onstatechange" | "addEventListener" | "removeEventListener" | "listener" | "dispatchEvent" | "audioWorklet" | "destination"; // "createScriptProcessor";
 // "createMediaStreamSource" | "createMediaElementSource" | "createMediaStreamTrackSource" |
 // "baseLatency" | "suspend" |
 
@@ -125,6 +125,9 @@ export class Context extends BaseContext {
 			this._context = createAudioContext({
 				latencyHint: options.latencyHint,
 			});
+			if ((this._context as any)._nativeAudioContext && (this._context as any)._nativeAudioContext.createScriptProcessor) {
+				this._context.createScriptProcessor = (this._context as any)._nativeAudioContext.createScriptProcessor;
+			}
 		}
 		this._ticker = new Ticker(this.emit.bind(this, "tick"), options.clockSource, options.updateInterval);
 		this.on("tick", this._timeoutLoop.bind(this));
@@ -221,6 +224,13 @@ export class Context extends BaseContext {
 	}
 	createWaveShaper(): WaveShaperNode {
 		return this._context.createWaveShaper();
+	}
+	createScriptProcessor(): ScriptProcessorNode {
+		if ((this._context as any)._nativeAudioContext !== undefined) {
+			return (this._context as any)._nativeAudioContext.createScriptProcessor();
+		} else {
+			return this._context.createScriptProcessor();
+		}
 	}
 	createMediaStreamSource(stream: MediaStream): MediaStreamAudioSourceNode {
 		assert(isAudioContext(this._context), "Not available if OfflineAudioContext");

@@ -14,3 +14,9 @@ These singletons call getContext() when page is initializing. Therefore, the err
 **Add polyfill for constant-source-node**
 
 **Add polyfill for promise OfflineContext.startRendering**
+
+**Add polyfill copyToChannel and copyFromChannel for AudioBuffer**
+
+**enable createScriptProcessor**
+
+**make Tone.Param._param.getValueAtTime bind to Tone.Param's getValueAtTime**

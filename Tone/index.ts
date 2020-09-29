@@ -1,5 +1,6 @@
 require('./shim/offlineContext');
 require('./shim/audioParam');
+require('./shim/audioBuffer');
 require("constant-source-node").polyfill();
 export { getContext, setContext } from "./core/Global";
 export * from "./classes";

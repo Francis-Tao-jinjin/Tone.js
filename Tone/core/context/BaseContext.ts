@@ -53,6 +53,8 @@ export abstract class BaseContext extends Emitter<"statechange" | "tick"> implem
 
 	abstract createWaveShaper(): WaveShaperNode
 
+	abstract createScriptProcessor(): ScriptProcessorNode
+
 	abstract createMediaStreamSource(_stream: MediaStream): MediaStreamAudioSourceNode
 
 	abstract createMediaStreamDestination(): MediaStreamAudioDestinationNode

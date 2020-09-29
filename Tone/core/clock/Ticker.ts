@@ -26,7 +26,7 @@ export class Ticker {
 	/**
 	 * track the callback interval
 	 */
-	private _timeout!: number;
+	private _timeout!: ReturnType<typeof setTimeout>;
 
 	/**
 	 * private reference to the worker
@@ -107,7 +107,7 @@ export class Ticker {
 	private _disposeClock(): void {
 		if (this._timeout) {
 			clearTimeout(this._timeout);
-			this._timeout = 0;
+			(this._timeout as any) = 0;
 		}
 		if (this._worker) {
 			this._worker.terminate();
