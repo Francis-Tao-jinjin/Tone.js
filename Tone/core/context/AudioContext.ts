@@ -61,10 +61,25 @@ export const theWindow: ToneWindow | null = typeof self === "object" ? self : nu
 export const hasAudioContext = theWindow &&
 	(theWindow.hasOwnProperty("AudioContext") || theWindow.hasOwnProperty("webkitAudioContext"));
 
+let stdAudioWorkletSupport = true;
 export function createAudioWorkletNode(context: AnyAudioContext, name: string, options?: Partial<AudioWorkletNodeOptions>): AudioWorkletNode {
 	assert(isDefined(stdAudioWorkletNode), "This node only works in a secure context (https or localhost)");
 	// @ts-ignore
-	return new stdAudioWorkletNode(context, name, options);
+	let workletNode:AudioWorkletNode;
+	if (stdAudioWorkletSupport) {
+		try {
+			workletNode = new stdAudioWorkletNode(context, name, options);
+		} catch (e) {
+			stdAudioWorkletSupport = false;
+			console.warn('create stdAudioWorkletNode failed', e);
+			console.warn('will use native AudioWorkletNode');
+			workletNode = new AudioWorkletNode(context, name, options);
+		}
+	} else {
+		workletNode = new AudioWorkletNode(context, name, options);
+	}
+	// return new stdAudioWorkletNode(context, name, options);
+	return workletNode;
 }
 
 /**

@@ -51,16 +51,27 @@ export abstract class ToneAudioWorklet<Options extends ToneAudioWorkletOptions> 
 
 		this._dummyGain = this.context.createGain();
 		this._dummyParam = this._dummyGain.gain;
-
 		// Register the processor
-		this.context.addAudioWorkletModule(blobUrl, name).then(() => {
-			// create the worklet when it's read
+		const module = this.context.addAudioWorkletModule(blobUrl, name);
+		module.then(() => {
 			if (!this.disposed) {
 				this._worklet = this.context.createAudioWorkletNode(name, this.workletOptions);
 				this._worklet.onprocessorerror = this.onprocessorerror.bind(this);
 				this.onReady(this._worklet);
 			}
-		});
+		}).catch((e) => {
+			console.error(e);
+		})
+		// this.context.addAudioWorkletModule(blobUrl, name).then(() => {
+		// 	// create the worklet when it's read
+		// 	if (!this.disposed) {
+		// 		this._worklet = this.context.createAudioWorkletNode(name, this.workletOptions);
+		// 		this._worklet.onprocessorerror = this.onprocessorerror.bind(this);
+		// 		this.onReady(this._worklet);
+		// 	}
+		// }).catch((e) => {
+		// 	console.error('addAudioWorkletModule error:', e);
+		// });
 	}
 
 	dispose(): this {
