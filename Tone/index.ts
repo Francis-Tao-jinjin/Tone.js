@@ -2,6 +2,7 @@ require('./shim/offlineContext');
 require('./shim/audioParam');
 require('./shim/audioBuffer');
 require("constant-source-node").polyfill();
+require("stereo-panner-node").polyfill();
 export { getContext, setContext } from "./core/Global";
 export * from "./classes";
 export * from "./version";

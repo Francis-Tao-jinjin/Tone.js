@@ -105,6 +105,7 @@
 	},
 	"dependencies": {
 		"constant-source-node": "^1.1.1",
+		"stereo-panner-node": "^1.4.0",
 		"standardized-audio-context": "^25.1.0",
 		"tslib": "^2.0.1"
 	},
