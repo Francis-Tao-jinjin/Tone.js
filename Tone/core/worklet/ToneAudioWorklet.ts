@@ -61,17 +61,8 @@ export abstract class ToneAudioWorklet<Options extends ToneAudioWorkletOptions> 
 			}
 		}).catch((e) => {
 			console.error(e);
+			throw new Error(e);
 		})
-		// this.context.addAudioWorkletModule(blobUrl, name).then(() => {
-		// 	// create the worklet when it's read
-		// 	if (!this.disposed) {
-		// 		this._worklet = this.context.createAudioWorkletNode(name, this.workletOptions);
-		// 		this._worklet.onprocessorerror = this.onprocessorerror.bind(this);
-		// 		this.onReady(this._worklet);
-		// 	}
-		// }).catch((e) => {
-		// 	console.error('addAudioWorkletModule error:', e);
-		// });
 	}
 
 	dispose(): this {

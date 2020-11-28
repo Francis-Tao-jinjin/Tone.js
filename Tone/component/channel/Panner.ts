@@ -66,8 +66,10 @@ export class Panner extends ToneAudioNode<TonePannerOptions> {
 		// this is necessary for standardized-audio-context
 		// doesn't make any difference for the native AudioContext
 		// https://github.com/chrisguttandin/standardized-audio-context/issues/647
-		this._panner.channelCount = options.channelCount;
-		this._panner.channelCountMode = "explicit";
+		
+		// set the _pannel.channelCount to 1 may cause safari slient
+		// this._panner.channelCount = options.channelCount;
+		// this._panner.channelCountMode = "explicit";
 
 		// initial value
 		readOnly(this, "pan");

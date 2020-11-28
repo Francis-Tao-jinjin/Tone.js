@@ -2,6 +2,7 @@ import {
 	AudioContext as stdAudioContext,
 	AudioWorkletNode as stdAudioWorkletNode,
 	OfflineAudioContext as stdOfflineAudioContext,
+	TContext,
 } from "standardized-audio-context";
 import { assert } from "../util/Debug";
 import { isDefined } from "../util/TypeCheck";
@@ -66,9 +67,9 @@ export function createAudioWorkletNode(context: AnyAudioContext, name: string, o
 	assert(isDefined(stdAudioWorkletNode), "This node only works in a secure context (https or localhost)");
 	// @ts-ignore
 	let workletNode:AudioWorkletNode;
-	if (stdAudioWorkletSupport) {
+	if (stdAudioWorkletSupport && stdAudioWorkletNode) {
 		try {
-			workletNode = new stdAudioWorkletNode(context, name, options);
+			workletNode = (new stdAudioWorkletNode((context as any) as TContext, name, options) as any);
 		} catch (e) {
 			stdAudioWorkletSupport = false;
 			console.warn('create stdAudioWorkletNode failed', e);

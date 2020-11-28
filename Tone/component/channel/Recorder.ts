@@ -114,8 +114,7 @@ export class Recorder extends ToneAudioNode<RecorderOptions> {
 		const startPromise = new Promise(done => {
 			const handleStart = () => {
 				this._recorder.removeEventListener("start", handleStart, false);
-
-				done();
+				done(true);
 			};
 
 			this._recorder.addEventListener("start", handleStart, false);

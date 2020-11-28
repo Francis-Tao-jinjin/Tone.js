@@ -143,7 +143,7 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.11.3.tgz#9e1eae46738bcd08e23e867bab43e7b95299a8f9"
   integrity sha512-REo8xv7+sDxkKvoxEywIdsNFiZLybwdI7hcT5uEPyQrSMB4YQ973BfC9OOrD/81MaIjh6UxdulIQXkjmiH3PcA==
 
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5":
+"@babel/runtime@^7.12.5":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
   integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
@@ -752,7 +752,7 @@ audiobuffer-to-wav@^1.0.0:
   resolved "https://registry.yarnpkg.com/audiobuffer-to-wav/-/audiobuffer-to-wav-1.0.0.tgz#d5b432271455e7fee56b111cd0f8d620d7f9e105"
   integrity sha1-1bQyJxRV5/7laxEc0PjWINf54QU=
 
-automation-events@^3.0.0:
+automation-events@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-3.0.3.tgz#08de5bdef461bd0c9ed6cd3a7a660afa7112cecd"
   integrity sha512-iFZcgSVwp8JnSXCv15LQ/tyKEAm+ToBTseD3bYWwIUUUzWQGwUMKMmIm2hM+KlfC0qBZu1xj/WqidhqvGvA3sA==
@@ -6053,14 +6053,14 @@ ssri@^6.0.1:
   dependencies:
     figgy-pudding "^3.5.1"
 
-standardized-audio-context@25.1.0:
-  version "25.1.0"
-  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.1.0.tgz#579fac078aae179bd595752e5228af9791f63c9b"
-  integrity sha512-Gc49nrsYjatbDYrhT0/rAbpi6JuQKz0j2GOnqtfFguHTmajtOgjm1uRZe3SblhmEnT48XNvF/oJ+pLsk5r455A==
+standardized-audio-context@^25.1.0:
+  version "25.1.6"
+  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.1.6.tgz#c1908fe6b8fe221cc2836c9873573474f7992ad0"
+  integrity sha512-iHvPiwbDctxpmP9sufnADBeiBpYc8km6i53TFGVGkc5usBmAJ8YNhATXXrSFZYR4MGxIImZGWCCH4LrPatPFrQ==
   dependencies:
-    "@babel/runtime" "^7.11.2"
-    automation-events "^3.0.0"
-    tslib "^2.0.1"
+    "@babel/runtime" "^7.12.5"
+    automation-events "^3.0.2"
+    tslib "^2.0.3"
 
 static-extend@^0.1.1:
   version "0.1.2"

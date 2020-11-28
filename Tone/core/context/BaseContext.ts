@@ -79,7 +79,8 @@ export abstract class BaseContext extends Emitter<"statechange" | "tick"> implem
 
 	abstract get rawContext(): AnyAudioContext
 
-	abstract async addAudioWorkletModule(_url: string, _name: string): Promise<void>
+	// abstract async addAudioWorkletModule(_url: string, _name: string): Promise<void>
+	abstract addAudioWorkletModule(_url: string, _name: string): Promise<void>
 
 	abstract lookAhead: number;
 

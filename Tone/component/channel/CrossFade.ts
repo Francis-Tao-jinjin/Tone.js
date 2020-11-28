@@ -112,8 +112,10 @@ export class CrossFade extends ToneAudioNode<CrossFadeOptions> {
 		// this is necessary for standardized-audio-context
 		// doesn't make any difference for the native AudioContext
 		// https://github.com/chrisguttandin/standardized-audio-context/issues/647
-		this._panner.channelCount = 1;
-		this._panner.channelCountMode = "explicit";
+		
+		// set the _pannel.channelCount to 1 may cause safari slient
+		// this._panner.channelCount = 1;
+		// this._panner.channelCountMode = "explicit";
 		connect(this._split, this.a.gain, 0);
 		connect(this._split, this.b.gain, 1);
 
