@@ -20,3 +20,5 @@ These singletons call getContext() when page is initializing. Therefore, the err
 **enable createScriptProcessor**
 
 **make Tone.Param._param.getValueAtTime bind to Tone.Param's getValueAtTime**
+
+**Add polyfill StereoPannerNode, comment out set panner channelCount in CrossFade and Panner, because it will cause safari slient with stereoNode polyfill**
