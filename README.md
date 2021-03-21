@@ -22,3 +22,6 @@ These singletons call getContext() when page is initializing. Therefore, the err
 **make Tone.Param._param.getValueAtTime bind to Tone.Param's getValueAtTime**
 
 **Add polyfill StereoPannerNode, comment out set panner channelCount in CrossFade and Panner, because it will cause safari slient with stereoNode polyfill**
+
+**If the useragent is Safari, then use original offline context instead of stdOfflineCtx, otherwise, there will be `Attempted to assign to readonly property.` Error throw fromt ToneConstantSource constructor, I find this bug in Safari@14.0.3, macOS Mojave**
+

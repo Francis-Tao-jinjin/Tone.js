@@ -17,6 +17,10 @@ export function createAudioContext(options?: AudioContextOptions): AudioContext 
  * Create a new OfflineAudioContext
  */
 let stdOfflineCtxSupport = true;
+if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+	stdOfflineCtxSupport = false;
+}
+
 export function createOfflineAudioContext(channels: number, length: number, sampleRate: number): OfflineAudioContext {
 	let offlineContext:OfflineAudioContext;
 	if (stdOfflineCtxSupport) {
